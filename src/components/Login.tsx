@@ -32,29 +32,35 @@ const Login = () =>{
 
     return(
         <div className="container min-w-full items-center justify-center flex ">
-            <div className="fixed top-0 left-0 right-0 px-8 py-4 font-medium italic text-3xl">
-                Expert<span className='text-green-900'>Pro</span>            
+            <div className="fixed top-0 left-0 right-0 px-8 py-4 bg-zinc-900 text-white font-medium italic text-2xl">
+                Campus<span className='text-green-900'>Pro</span>            
             </div>
-            <div className="formContainer border rounded-lg px-8  py-4">
-                <h3 className='text-3xl font-medium mb-6'>Login</h3>
+            <div className="formContainer border  bg-zinc-900 rounded-lg px-16  py-14">
+                <div className="top mb-12 text-center">
+                    <h3 className='text-3xl text-white font-medium  mb-2'>Login</h3>
+                    <p className='text-gray-500 '>Please enter your login and password!
+
+</p>
+                </div>
+               
                 <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}  >
                     <div className="inputWrapper flex flex-col  w-fit " >
-                        <label  className='mb-2'>Email</label>
+                        <label  className='mb-2 text-white'>Email</label>
                         <input  
                         {...register('email')}  
                             type="email"
-                            className='w-72 border h-8 rounded-sm ps-2 outline-none' 
+                            className='w-96 border h-10 rounded-md ps-2 outline-none' 
                           
                         />
                         {errors.email? <p className='text-red-500'>{errors.email.message}</p> : null}
 
                     </div>
                     <div className="inputWrapper flex flex-col  w-fit " >
-                        <label  className='mb-2'>Password</label>
+                        <label  className='mb-2 text-white'>Password</label>
                         <input
                                {...register('password')}  
                             type="password"
-                            className='w-72 border h-8 rounded-sm ps-2 outline-none' 
+                            className='w-96 border h-10 rounded-md ps-2 outline-none' 
                           
                         />
                          {errors.password? <p className='text-red-500'>{errors.password.message}</p> : null}
@@ -64,7 +70,7 @@ const Login = () =>{
                         disabled={!isValid}
                         type="submit"   
                         value="Login"
-                        className='bg-green-600 disabled:bg-green-400  text-white font-bold m-auto w-full mt-2  py-2 mb-4 px-4 rounded '
+                        className='bg-green-600 disabled:bg-green-400  text-white font-bold m-auto w-full   py-2 mb-4 mt-6 px-4 rounded '
                     />
                    
 
