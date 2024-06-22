@@ -33,7 +33,7 @@ const Login = () =>{
     return(
         <div className="container min-w-full items-center justify-center flex ">
             <div className="fixed top-0 left-0 right-0 px-8 py-4 bg-zinc-900 text-white font-medium italic text-2xl">
-                Campus<span className='text-green-900'>Pro</span>            
+                Campus<span className='text-green-600'>Pro</span>            
             </div>
             <div className="formContainer border  bg-zinc-900 rounded-lg px-16  py-14">
                 <div className="top mb-12 text-center">
@@ -70,7 +70,7 @@ const Login = () =>{
                         disabled={!isValid}
                         type="submit"   
                         value="Login"
-                        className='bg-green-600 disabled:bg-green-400  text-white font-bold m-auto w-full   py-2 mb-4 mt-6 px-4 rounded '
+                        className='bg-green-600 disabled:bg-green-400  text-white font-bold m-auto    py-2 mb-4 mt-6 px-4 rounded '
                     />
                    
 
