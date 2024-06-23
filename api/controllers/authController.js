@@ -1,27 +1,29 @@
-const User = require('../models/User');
+const User = require('../models/Admin');
 const jwt = require('jsonwebtoken');
-const bcrypt = require("bcyrpt");
+const bcrypt = require('bcrypt');
 
 
 
 const login = async (req , res)=>{
-    const {email , password} = res.body;
+    const {email , password} = req.body;
     if(!email || !password){
         return res.status(400).json({message:"All fields are required"});
     }
     const foundUser = await User.findOne({email}).exec();
 
+
+
     if(!foundUser){
         return res.status(401).json({message:'User does not exist'});
     }
 
-    const match = await bcrypt.compare(password, foundUser.password );
+    const match = await  bcrypt.compare(password, foundUser.password );
     if(!match){return res.status(401).json({message:"Wrong password"})}
 
     const accesToken = jwt.sign(
         {
             UserInfo:{
-                id:foundUser_id,
+                id: foundUser._id,
             },
         },
         process.env.ACCES_TOKEN_SECRET,
@@ -30,7 +32,7 @@ const login = async (req , res)=>{
     const refreshToken = jwt.sign(
         {
             UserInfo:{
-                id:foundUser_id,
+                id:foundUser._id,
             },
         },
         process.env.REFRESH_ACCES_TOKEN,
@@ -47,3 +49,5 @@ const login = async (req , res)=>{
         email:foundUser.email,
     });
 };
+
+module.exports = {login}
