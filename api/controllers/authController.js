@@ -20,6 +20,7 @@ const login = async (req , res)=>{
     const match = await  bcrypt.compare(password, foundUser.password );
     if(!match){return res.status(401).json({message:"Wrong password"})}
 
+    console.log('loggggged')
     const accesToken = jwt.sign(
         {
             UserInfo:{

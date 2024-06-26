@@ -1,10 +1,15 @@
 import {useForm, SubmitHandler  }  from 'react-hook-form'
 import { zodResolver} from '@hookform/resolvers/zod'
 import z from 'zod';
-
+import {login} from '../services/api';
+import Cookies from 'js-cookie';
+import {  useNavigate } from 'react-router-dom';
 
 
 const Login = () =>{
+
+
+    const navigate = useNavigate()
         const Admin = z.object({
             email : z.string().email({message:"Email not valid"}),
             password : z.string().min(6,{message : "Password not valid"})
@@ -18,14 +23,21 @@ const Login = () =>{
     )
 
     type dataType = z.infer<typeof Admin>;
-    const onSubmit: SubmitHandler<dataType> = ({email , password}) => {
-        const admin = {
-            email,
-            password
-        }
-        console.log(admin)
 
-        reset()
+    const onSubmit: SubmitHandler<dataType> = async ({email , password}) => {
+        console.log(email,password)
+        try {
+            const res = await login(email, password);
+            console.log('Logged in successfully:', res);
+            const {accesToken} = res.data
+            if(accesToken) Cookies.set('access_Token',accesToken)
+            navigate('/home');
+            
+          } catch (error) {
+            console.error('Login error:', error);
+          } finally {
+            reset();
+          }
     }
 
       
@@ -70,7 +82,7 @@ const Login = () =>{
                         disabled={!isValid}
                         type="submit"   
                         value="Login"
-                        className='bg-green-600 disabled:bg-green-400  text-white font-bold m-auto    py-2 mb-4 mt-6 px-4 rounded '
+                        className='bg-green-600 submit disabled:bg-green-400  text-white font-bold m-auto    py-2 mb-4 mt-6 px-4 rounded '
                     />
                    
 
